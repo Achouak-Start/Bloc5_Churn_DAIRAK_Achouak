@@ -1,0 +1,5 @@
+Modele,AUC
+Régression logistique (avant),0.811
+Régression logistique (après),0.8109111995101558
+Random Forest (avant),0.772
+Random Forest (après),0.8140416610910388
