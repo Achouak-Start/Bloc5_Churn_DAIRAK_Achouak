@@ -6,3 +6,4 @@ scipy
 fastapi
 uvicorn
 pytest
+httpx
