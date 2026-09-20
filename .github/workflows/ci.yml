@@ -26,3 +26,20 @@ jobs:
 
       - name: Lancer les tests de l'API
         run: pytest scripts/test_api.py -v
+
+      - name: Évaluer les performances du modèle
+        run: python scripts/evaluate_model.py
+
+      - name: Enregistrer le modèle dans le registre (artifact GitHub)
+        uses: actions/upload-artifact@v4
+        with:
+          name: modele-churn
+          path: models/modele_churn_final.pkl
+
+      - name: Démarrer l'API et vérifier le déploiement
+        run: |
+          uvicorn api.main:app --host 0.0.0.0 --port 8000 &
+          sleep 5
+          curl -X POST http://127.0.0.1:8000/predict \
+            -H "Content-Type: application/json" \
+            -d '{"Recence": 300, "Frequence": 1, "Montant": 150}'

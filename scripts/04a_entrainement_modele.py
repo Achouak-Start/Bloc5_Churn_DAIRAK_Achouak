@@ -61,6 +61,15 @@ print(confusion_matrix(y_test, y_pred_rf))
 print(f"AUC (courbe ROC) : {roc_auc_score(y_test, y_proba_rf):.3f}")
 
 # ============================================
+# 3bis. COEFFICIENTS DE LA RÉGRESSION LOGISTIQUE
+#       (quels facteurs augmentent/diminuent le risque de churn)
+# ============================================
+print("\n=== Coefficients de la régression logistique ===")
+for variable, coef in zip(X.columns, modele_logreg.coef_[0]):
+    sens = "augmente" if coef > 0 else "diminue"
+    print(f"{variable} : {coef:.5f} -> {sens} le risque de churn")
+
+# ============================================
 # 5. SAUVEGARDE DES RÉSULTATS
 # ============================================
 resultats = pd.DataFrame({
